@@ -10,6 +10,16 @@ Content-Type: application/json
   "clienteId": 1
 }
 
-<> 2024-07-23T210637.400.json
-<> 2024-07-23T210631.200.json
-<> 2024-07-23T205823.500.json
+###
+POST http://localhost:8084/movimientos/register-movimientos
+Content-Type: application/json
+
+{
+  "fecha": "10/02/2022",
+  "tipoMovimiento": "Corriente",
+  "valor": 20,
+  "saldo": 60,
+  "cuenta": {
+    "cuenta_id": 1
+  }
+}
