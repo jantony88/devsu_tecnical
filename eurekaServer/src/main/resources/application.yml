@@ -1,0 +1,16 @@
+#spring.application.name=eureka_server
+spring:
+  application:
+    name: eureka_server
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+  server:
+    enable-self-preservation: true
+    renewal-percent-threshold: 0.85
+#    enableSelfPreservation: true

@@ -1,0 +1,23 @@
+#spring.application.name=api-gateway
+#logging.file.name =tmp/api-gateway-microservice.log
+spring:
+  application:
+    name: api_gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+    loadbalancer:
+      ribbon:
+        enabled: true
+        list-of-servers: localhost:8761
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+#server:
+#  port: 8081

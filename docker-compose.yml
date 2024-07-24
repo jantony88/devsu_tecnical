@@ -1,0 +1,103 @@
+
+
+services:
+  # PostgreSQL para clientes
+  postgres_clients:
+    container_name: postgres_clients_container
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-clients-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=db_clients
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=S3cret
+
+  # PostgreSQL para movimientos
+  postgres_movements:
+    container_name: postgres_movements_container
+    image: postgres:14-alpine
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-movements-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=db_movimientos
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=S3cret
+
+    # REST API para movientos bancarios
+    
+  movimientos_service:
+    build: movimientoService
+    image: image-movimientos_service:latest
+    container_name: api_movimientos_service_container    
+    ports:
+      - "8084:8084"
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://localhost:5433/db_movimientos
+      - DATASOURCE_USERNAME=sonar
+      - DATASOURCE_PASSWORD=S3cret
+    restart: always
+
+  #REST API para clientes
+  cliente_service:
+    build: ClientServicer
+    image: image-clientes:latest
+    container_name: api_clientes_container    
+    ports:
+      - "8083:8083"
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://postgres_clients:5432/db_clients
+      - DATASOURCE_USERNAME=sonar
+      - DATASOURCE_PASSWORD=S3cret
+    restart: always
+
+  #eureka server port 8761
+  eureka_server:
+    build: eurekaServer
+    image: image-eureka-server:latest
+    container_name: eureka_server_container    
+    ports:
+      - "8761:8761"
+    restart: always
+
+  #api-gateway
+  api_gateway:
+    build: api-gateway
+    image: image-api_gateway:latest
+    container_name: api_gateway_container    
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - eureka_server
+
+  #
+  # Rabbit MQ 
+  rabbitmq:
+    container_name: rabbitmq_container
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: Admin12.
+    ports:
+      - "5672:5672"  
+      - "15672:15672" 
+    restart: always
+  #Zipkin 
+  zipkin:
+    container_name: zipkin_container
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    restart: always
+
+volumes:
+  postgres-clients-data:
+  postgres-movements-data:
+
+networks:
+  default:
+    driver: bridge
