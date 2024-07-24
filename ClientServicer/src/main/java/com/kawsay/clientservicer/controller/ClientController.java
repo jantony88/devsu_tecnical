@@ -5,6 +5,7 @@ import com.kawsay.clientservicer.entity.ClienteDTO;
 import com.kawsay.clientservicer.services.GenericoImplements;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,13 +51,14 @@ public class ClientController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "Error al registrar el cliente: " + e.getMessage());
-            return ResponseEntity.badRequest().body(response);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }
     }
 
 
     @GetMapping("/listClientes")
     public ResponseEntity<?> getAllClientes() {
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "Lista de clientes..");
         List<ClienteDTO> clientesDTO = clientService.listClientes().stream().toList();
         if(clientesDTO.isEmpty()){
             Map<String, Object> response = new HashMap<>();
@@ -74,6 +78,7 @@ public class ClientController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("errors", errors);
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "Error de validacion de informacon.");
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -82,11 +87,13 @@ public class ClientController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
             response.put("message", "Cliente actualizado con exito");
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "Cliente actualizado con exito");
             return ResponseEntity.ok(response);
         }catch (Exception e){
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "Error al actualizar el cliente: " + e.getMessage());
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "Error al actualizar el cliente: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -98,12 +105,14 @@ public class ClientController {
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("success", false);
             errorResponse.put("message", "Formato de cedula invalido");
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "deleteCliente: Formato de cedula invalido");
             return ResponseEntity.badRequest().body(errorResponse);
         }
         clientService.deleteCliente(cedula);
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Cliente eliminado con exito");
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "deleteCliente: Cliente eliminado con exito");
         return ResponseEntity.ok(response);
     }
 
@@ -113,6 +122,7 @@ public class ClientController {
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("success", false);
             errorResponse.put("message", "Formato de cedula invalido");
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "getCliente: Formato de cedula invalido");
             return ResponseEntity.badRequest().body(errorResponse);
         }
         Cliente cliente = clientService.getCliente(cedula);
@@ -120,8 +130,10 @@ public class ClientController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "Cliente no encontrado");
+            Logger.getLogger(getClass().getName()).log(Level.INFO, "getCliente: Cliente no encontrado");
             return ResponseEntity.ok(response);
         }
+        Logger.getLogger(getClass().getName()).log(Level.INFO, "getCliente: Cliente encontrado"+cliente.toString());
         return ResponseEntity.ok(cliente);
     }
 }

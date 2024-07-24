@@ -3,11 +3,10 @@ POST http://localhost:8083/clientes/register
 Content-Type: application/json
 
 {
-  "identificacion": "02311478",
-  "nombre": "Angelo",
-  "apellido": "Peñafiel",
-  "genero": "m",
-  "direccion": "av Asig y olvemo",
+  "identificacion": "123456789",
+  "nombre": "Juan",
+  "apellido": "Perez",
+  "direccion": "Calle 123, 456, Ciudad X",
   "telefono": "12335",
   "contrasena": "123",
   "estado": true
