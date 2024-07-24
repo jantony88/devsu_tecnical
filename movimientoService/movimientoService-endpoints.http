@@ -1,0 +1,15 @@
+###
+POST http://localhost:8084/cuenta/register-cuenta
+Content-Type: application/json
+
+{
+  "numeroCuenta": "0002255",
+  "tipoCuenta": "Ahorros",
+  "saldoInicial": 600,
+  "estado": true,
+  "clienteId": 1
+}
+
+<> 2024-07-23T210637.400.json
+<> 2024-07-23T210631.200.json
+<> 2024-07-23T205823.500.json

@@ -1,0 +1,91 @@
+###Registro de clientes
+POST http://localhost:8083/clientes/register
+Content-Type: application/json
+
+{
+  "identificacion": "02311478",
+  "nombre": "Angelo",
+  "apellido": "Peñafiel",
+  "genero": "m",
+  "direccion": "av Asig y olvemo",
+  "telefono": "12335",
+  "contrasena": "123",
+  "estado": true
+}
+
+<> 2024-07-23T153651.200.json
+<> 2024-07-23T130826.200.json
+<> 2024-07-23T110411.200.json
+<> 2024-07-23T110327.200.json
+<> 2024-07-23T105204.200.json
+
+###Consulta de clientes
+GET http://localhost:8083/clientes/listClientes
+
+<> 2024-07-23T155051.200.json
+<> 2024-07-23T153656.200.json
+<> 2024-07-23T153624.200.json
+<> 2024-07-23T130854.200.json
+<> 2024-07-23T130831.200.json
+<> 2024-07-23T130810.200.json
+<> 2024-07-23T110417.200.json
+<> 2024-07-23T110333.200.json
+<> 2024-07-23T110318.200.json
+<> 2024-07-23T110159.200.json
+<> 2024-07-23T105949.200.json
+<> 2024-07-23T105947.200.json
+<> 2024-07-23T105232.200.json
+<> 2024-07-23T105208.200.json
+<> 2024-07-23T105151.200.json
+<> 2024-07-23T102535.200.json
+
+###
+PUT http://localhost:8083/clientes/updateCliente
+Content-Type: application/json
+
+{
+  "nombre": "Angeles",
+  "apellido": "Caiza",
+  "genero": "M",
+  "identificacion": "02311422",
+  "direccion": "Av ernestro",
+  "telefono": "026688"
+}
+
+<> 2024-07-23T130837.200.json
+<> 2024-07-23T130818.400.json
+<> 2024-07-23T110531.200.json
+<> 2024-07-23T110505.400.json
+<> 2024-07-23T110454.400.json
+<> 2024-07-23T105931.400.json
+<> 2024-07-23T105228.200.json
+
+###
+DELETE http://localhost:8083/clientes/deleteCliente/02311
+
+<> 2024-07-23T182038.500.json
+<> 2024-07-23T182016.500.json
+<> 2024-07-23T182012.500.json
+<> 2024-07-23T182009.500.json
+<> 2024-07-23T105926.200.json
+<> 2024-07-23T105647.500.json
+<> 2024-07-23T105439.400.json
+<> 2024-07-23T105438.400.json
+<> 2024-07-23T105434.400.json
+<> 2024-07-23T105244.400.json
+
+###
+GET http://localhost:8083/clientes/getCliente/02311422
+
+<> 2024-07-23T205459.200.json
+<> 2024-07-23T182737.200.json
+<> 2024-07-23T182032.200.json
+<> 2024-07-23T182027.200.json
+<> 2024-07-23T182006.200.json
+<> 2024-07-23T181422.200.json
+<> 2024-07-23T155650.200.json
+<> 2024-07-23T155630.200.json
+<> 2024-07-23T155116.404.json
+<> 2024-07-23T155105.404.json
+<> 2024-07-23T155059.404.json
+<> 2024-07-23T154050.404.json
