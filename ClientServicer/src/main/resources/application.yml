@@ -15,6 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  #configuraciones de rabbit MQ
   rabbitmq:
     host: localhost
     port: 5672
@@ -26,4 +27,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-#configuraciones de rabbit MQ
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
